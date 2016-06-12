@@ -1,0 +1,52 @@
+<head>
+	<title>Vurbble</title>
+</head>
+<body>
+	<h1>Welcome to Vurbble</h1>
+	<p>{{> loginButtons}}</p>
+	All Users:
+	{{> users}}
+	All Conversations:
+	{{> conversations}}
+	{{> input}}
+	<p></p>
+	Selected Conversation:
+	<p></p>
+	{{> messages}}
+</body>
+<template name="users">
+	<ul>
+		{{#each user}}
+			<li class="user {{selectedClass}}">{{username}}</li>
+		{{/each}}
+		{{#if selectedUser}}
+			<li>Selected User: {{selectedUser.username}}</li>
+			<li><button class="newConvo">Create Conversation</button></li>
+		{{/if}}		
+	</ul>
+
+</template>
+<template name="conversations">
+	<ul>
+		{{#each conversation}}
+			<li class="conversation {{selectedClass}}">
+				{{#each participants}}
+					{{user.username}}
+				{{/each}}
+			</li>
+		{{/each}}		
+	</ul>
+
+</template>
+<template name="messages">
+	<div class="messageBox">
+	  {{#each displayMessages}}
+	  <strong style="height:250px">{{user.username}}:</strong>
+	    {{body}}
+	    <br>
+	  {{/each}}
+	</div>
+</template>
+<template name="input">
+    <input type="text" id="chatBox" name="message">
+</template>
