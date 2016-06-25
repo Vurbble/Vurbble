@@ -1,3 +1,7 @@
 .selected{
 	background-color: blue;
 }
+
+.user{
+         cursor: pointer;
+}
