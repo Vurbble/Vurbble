@@ -28,7 +28,7 @@ Accounts.ui.config({
 		},
 	});
 	Template.users.events({
-		'user' : function(){
+		'click .user' : function(){
 			var userId = this._id;
 			Session.set('selectedUser', userId);
 			var selectedUser = Session.get('selectedUser');
