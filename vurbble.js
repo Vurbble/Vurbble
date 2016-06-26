@@ -69,7 +69,12 @@ Accounts.ui.config({
 			Session.set('selectedConversation', conversationId);
 			var selectedConversation= Session.get('selectedConversation');
 			console.log(selectedConversation);
-
+			//check to see if user is a participant			
+			var currentUser = Meteor.userId();
+			console.log(currentUser);
+			if(!currentUser.isParticipatingIn(selectedConversation)){
+				console.log("You are not a participant")
+			};
 		},	
 	});
 
@@ -84,18 +89,18 @@ Accounts.ui.config({
 	Template.input.events({
 	 		'keyup [name=message]' : function (event) {
 	    		if (event.which == 13) {
-	    			var conversationId= Session.get("selectedConversation");
-	    			var conversation =
-	      			Meteor.conversations.findOne({
+	    			var conversationId = Session.get("selectedConversation");
+	    			var conversation = Meteor.conversations.findOne({
 	      				_id:Session.get("selectedConversation")});
 	      			var text =  $('[name="message"]').val();
 	       				if(text !== ''){
-	        				conversation.sendMessage(text);
-	        				window.scrollTo(0,1600);
-	        				console.log("message");
-	        			}//if message
+	        					conversation.sendMessage(text);
+	        					window.scrollTo(0,1600);
+	        					console.log("message");	        					
+	        				}//if message
 	      		$('[name="message"]').val('');
-	    		} // if event
+	    		} // if event	    		
 	  		} // if keyup
+
 	});
 };	
